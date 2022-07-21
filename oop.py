@@ -85,12 +85,6 @@ class Person():
 
 
 
-
-#file = open('database.json')
-#Database = json.load(file)
-
-
-
 class Account(Person):
 
     def __init__(self, username, password, name, email, phone):
@@ -146,8 +140,11 @@ class Account(Person):
                 self.logged_in = Vars.loggedIn
 
 
+    def log_in(self, username, password):
+
+
 # Hi, welcome to the app. chose sign up or login
-### sign up
+### sign up.. creates object, stores data in db, also logged in...
 p_test = Person('rick', 'rick69@gmail.com', '6785356669')
 p_test.create_account('username2', 'password123')
 
@@ -155,6 +152,12 @@ p_test.create_account('username2', 'password123')
 uName = 'username2'
 pswrd = 'password123'
 # create a login method...
+### Ashish.. work on this one
+# for login, we will create a method which taked the data from the db and makes the object exactly like how its created in sign up
+#make the method in the Account Class
+# also init the Person object... using this example
+#Person.__init__(self, name, email, phone)
+
 
 
 
