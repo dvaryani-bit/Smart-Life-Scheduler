@@ -81,7 +81,16 @@ class Person():
         self.account = Account(username, password, self.name, self.email, self.phone)
         print(123)
         #self.account.verify_account()
+        
+#---------------------Ashish's Code---------------------------------------#                
 
+    
+    def Login_account(self, username, password):
+        self.username = username
+        self.password = password
+        self.login = Account.validate(self, username, password)
+
+ #---------------------(ends)Ashish's Code---------------------------------------#    
 
 
 
@@ -109,6 +118,29 @@ class Account(Person):
                 self.add_to_database(database)
         else:
             self.__dict__[key] = value
+            
+#---------------------Ashish's Code---------------------------------------#            
+    
+    
+    def validate(self, username, password):
+
+        # database = self.get_database
+
+        with open("database.json") as f:
+
+            data = json.load(f)
+
+        if username in data:
+
+            if password == data[username][0]["password"]:
+                print("Login Successful! Welcome Back")
+            else:
+                print("Login/Password incorrect")
+                
+ #---------------------(ends)Ashish's Code---------------------------------------#     
+            
+            
+            
 
     @staticmethod
     def get_database():
