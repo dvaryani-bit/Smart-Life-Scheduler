@@ -46,55 +46,99 @@ class Vars():
   loggedIn = True
   loggedOut = False
   database = 'database.json'
-  Vars.scopes = ['https://www.googleapis.com/auth/calendar.readonly']
+  scopes = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
 
+'''
+class Database():
 
-class Person():
-
-    def __init__(self, name, email, phone):
-        self.__name = name
-        self.__email = email
-        self.phone = phone
-        self.account = None
-
-    def create_account(self, username, password):
-        self.account = Account(username, password)
-        self.account.verify_account()
-
-
-
-class PasswordsDatabase():
-    def __init__(self):
-        self.database = None
-
+    @staticmethod
     def get_database(self):
         file = open(Vars.database)
         data = json.load(file)
         self.database = data
         return data
+    @staticmethod
+    def add_to_database(self, username, name, email, phone, password):
+        self.database[username] = {'name': name, 'email': email, 'phone': phone, 'password': password}
+        file = open('database.json','w')
+        json.dump(self.database, file, indent = 4)
+
+        ## saves the password to the database
+'''
+
+
+class Person():
+
+    def __init__(self, name, email, phone):
+        self.name = name
+        self.email = email
+        self.phone = phone
+        #self.account = None
+
+    def create_account(self, username, password):
+        self.account = Account(username, password, self.name, self.email, self.phone)
+        print(123)
+        #self.account.verify_account()
+
+
+
+
+
+#file = open('database.json')
+#Database = json.load(file)
+
 
 
 class Account(Person):
-    def __init__(self, username, password):
+
+    def __init__(self, username, password, name, email, phone):
+        Person.__init__(self, name, email, phone)
         self.username = username ## apply getter and setter to make sure account is not duplicated
         self.password = password  ## apply getter and setter to satisfy requirement
         self.accountStatus = Vars.accountStatusInactive
         self.logged_in = Vars.loggedOut
+
+    def __setattr__(self, key, value):
+        database = self.get_database()
+        if key == 'username':
+            if value in database:
+                raise Exception('Username is already in database, please choose another one')
+            else:
+                self.__dict__[key] = value
+        elif key == 'password':
+            if len(value) < 6:
+                raise Exception('Password should be greater than 6 characters')
+            else:
+                self.__dict__[key] = value
+                self.add_to_database(database)
+        else:
+            self.__dict__[key] = value
+
+    @staticmethod
+    def get_database():
+        file = open(Vars.database)
+        data = json.load(file)
+        return data
+
+    def add_to_database(self, database):
+        database[self.username] = {'name': self.name, 'email': self.email, 'phone': self.phone, 'password': self.password}
+        file = open('database.json', 'w')
+        json.dump(database, file)
 
     def send_verification_token(self):
         self.verify_token = random.randrange(1000, 9999)
         print(self.verify_token)
         ## send the verification token in email
 
-    def verify_account(self, user_token_input):
-        if user_token_input == self.verify_token:
-            self.status = Vars.accountStatusActive
-            self.logged_in = Vars.loggedIn
+    #def verify_account(self, user_token_input):
+    #    if user_token_input == self.verify_token:
+    #        self.status = Vars.accountStatusActive
+    #        self.logged_in = Vars.loggedIn
 
-    def reset_password(self):
-        pass
+    #def reset_password(self):
+    #    pass
 
     def authenticateLogin(self, username_input, password_input):
         if username_input in PasswordsDatabase.get_database():
@@ -102,9 +146,19 @@ class Account(Person):
                 self.logged_in = Vars.loggedIn
 
 
+# Hi, welcome to the app. chose sign up or login
+### sign up
 p_test = Person('rick', 'rick69@gmail.com', '6785356669')
-p_test.create_account('username1', 'password123')
-test = UserInputs(1, 2)
+p_test.create_account('username2', 'password123')
+
+### log in
+uName = 'username2'
+pswrd = 'password123'
+# create a login method...
+
+
+
+#test = UserInputs(1, 2)
 
 
 
@@ -120,8 +174,6 @@ class UserInputs:
 
     def userInputs(self):
         pass
-
-
 
     def get_calendar_data(self):
         creds = None
@@ -155,7 +207,7 @@ class UserInputs:
 
         except HttpError as error:
             print('An error occurred: %s' % error)
-
+        #createActivity(activity type = calendar )
     #sleeping time, waking time, calendar log in,
 
 
@@ -191,7 +243,7 @@ class Activity():
             pass
 
 
-
+### once activity objects are made, we need a method to create the calendar
 
 
 
@@ -205,8 +257,3 @@ class Calendar():
 class Notifications():
     def __init__(self, optimizedCalendar):
         self.optimizedCalendar = optimizedCalendar
-
-
-
-
-
