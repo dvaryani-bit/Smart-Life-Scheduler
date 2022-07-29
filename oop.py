@@ -20,7 +20,7 @@ class Vars():
   database = 'database.json'
   scopes = ['https://www.googleapis.com/auth/calendar.readonly']
   client_secret_file = 'credentials.json'
-  client_secret = {"installed":{"client_id":"767527063195-v8kclhr5to7uj8oiior1om52eskk3o0n.apps.googleusercontent.com","project_id":"lifeassist-352201","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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","redirect_uris":["http://localhost"]}}
+  #client_secret = {} # cannot share these datails, you can get your own Google Calendar API credentials
   create = 'Create'
   login = 'Login'
 
