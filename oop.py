@@ -1,3 +1,6 @@
+### Due to sensitivity, we cannot share the Google Calendar API token and credentials
+
+
 import os
 import datetime
 from google.oauth2.credentials import Credentials
