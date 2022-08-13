@@ -1,4 +1,4 @@
-### Due to sensitivity, we cannot share the Google Calendar API token and credentials
+### Due to sensitivity, cannot share the Google Calendar API token and credentials
 
 
 import os
