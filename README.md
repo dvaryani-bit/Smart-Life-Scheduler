@@ -5,7 +5,7 @@ This project was part of an advanced OOP class and currently has basic functiona
 
 There are many well developed applications in the market which achieve the similar goal that this project is aimed towards; however, the biggest limitation to them is that the data input is manual and static. What if someone wakes up an hour later or does not input their water intake on the app?
 
-The first goal to develop this project into a product is to automate the data inputs such as wak/sleep time and water intake. Wake/sleep times can be automated with apple watch integration; however, methods need to be explored to automate water intake data.
+In order to develop this project into a product, the first goal is to automate data inputs such as wake/sleep time and water intake. Wake/sleep times can be automated with apple watch integration and I am exploring methods to automate water intake data.
 
 
 
